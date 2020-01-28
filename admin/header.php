@@ -109,6 +109,12 @@
           </li>
 
           <li>
+            <a href="bank.php">
+              <i class="fa fa-building"></i> <span>REKENING BANK</span>
+            </a>
+          </li>
+
+          <li>
             <a href="kategori.php">
               <i class="fa fa-folder"></i> <span>DATA KATEGORI</span>
             </a>
@@ -139,8 +145,8 @@
 -->
 
           <li>
-            <a href="bank.php">
-              <i class="fa fa-building"></i> <span>REKENING BANK</span>
+            <a href="laporan.php">
+              <i class="fa fa-file"></i> <span>LAPORAN</span>
             </a>
           </li>
 
@@ -156,12 +162,6 @@
               <li><a href="user.php"><i class="fa fa-circle-o"></i> Data Pengguna</a></li>
               <li><a href="user_tambah.php"><i class="fa fa-circle-o"></i> Tambah Pengguna</a></li>
             </ul>
-          </li>
-
-          <li>
-            <a href="laporan.php">
-              <i class="fa fa-file"></i> <span>LAPORAN</span>
-            </a>
           </li>
 
           <li>
