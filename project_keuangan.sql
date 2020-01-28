@@ -1,14 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
+-- version 4.2.11
+-- http://www.phpmyadmin.net
 --
--- Host: localhost:3306
--- Generation Time: Jun 26, 2019 at 02:13 AM
--- Server version: 5.7.23
--- PHP Version: 7.2.10
+-- Host: 127.0.0.1
+-- Generation Time: 28 Jan 2020 pada 04.45
+-- Versi Server: 5.6.21
+-- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `project_keuangan`
@@ -17,40 +23,39 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bank`
+-- Struktur dari tabel `bank`
 --
 
-CREATE TABLE `bank` (
-  `bank_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `bank` (
+`bank_id` int(11) NOT NULL,
   `bank_nama` varchar(255) NOT NULL,
   `bank_nomor` varchar(255) NOT NULL,
   `bank_pemilik` varchar(255) NOT NULL,
   `bank_saldo` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `bank`
+-- Dumping data untuk tabel `bank`
 --
 
 INSERT INTO `bank` (`bank_id`, `bank_nama`, `bank_nomor`, `bank_pemilik`, `bank_saldo`) VALUES
-(1, 'BANK BRI', 'Diki', '0933-3393', 14500000),
-(3, 'BANK BCA', 'Diki', '18280-232-23', 1700000);
+(1, 'BANK BRI', 'Diki', '0933-3393', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hutang`
+-- Struktur dari tabel `hutang`
 --
 
-CREATE TABLE `hutang` (
-  `hutang_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `hutang` (
+`hutang_id` int(11) NOT NULL,
   `hutang_tanggal` date NOT NULL,
   `hutang_nominal` int(11) NOT NULL,
   `hutang_keterangan` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `hutang`
+-- Dumping data untuk tabel `hutang`
 --
 
 INSERT INTO `hutang` (`hutang_id`, `hutang_tanggal`, `hutang_nominal`, `hutang_keterangan`) VALUES
@@ -59,47 +64,41 @@ INSERT INTO `hutang` (`hutang_id`, `hutang_tanggal`, `hutang_nominal`, `hutang_k
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategori`
+-- Struktur dari tabel `kategori`
 --
 
-CREATE TABLE `kategori` (
-  `kategori_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `kategori` (
+`kategori_id` int(11) NOT NULL,
   `kategori` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `kategori`
+-- Dumping data untuk tabel `kategori`
 --
 
 INSERT INTO `kategori` (`kategori_id`, `kategori`) VALUES
-(1, 'Lainnya'),
-(3, 'Keluarga'),
-(4, 'Penjualan Aplikasi'),
-(5, 'Gaji Karyawan'),
-(6, 'Keperluan Pribadi'),
-(8, 'Keperluan Kantor'),
-(9, 'Keperluan Rumah'),
-(10, 'Biaya Tak Terduga'),
-(11, 'Cicilan Rumah'),
-(12, 'Pembuatan Aplikasi'),
-(13, 'Tunjangan Karyawan'),
-(14, 'Biaya Hosting Website');
+(15, 'Perbekalan Kantor (Office Suplies)'),
+(16, 'Peralatan Kantor (Office Appliences)'),
+(17, 'Mesin-mesin Kantor (Office Machine)'),
+(18, 'Perabot Kantor (Office Furniture)'),
+(19, 'Hiasan Kantor (Office Ornament)'),
+(21, 'Alat Bantu Peraga');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `piutang`
+-- Struktur dari tabel `piutang`
 --
 
-CREATE TABLE `piutang` (
-  `piutang_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `piutang` (
+`piutang_id` int(11) NOT NULL,
   `piutang_tanggal` date NOT NULL,
   `piutang_nominal` int(11) NOT NULL,
   `piutang_keterangan` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `piutang`
+-- Dumping data untuk tabel `piutang`
 --
 
 INSERT INTO `piutang` (`piutang_id`, `piutang_tanggal`, `piutang_nominal`, `piutang_keterangan`) VALUES
@@ -109,11 +108,11 @@ INSERT INTO `piutang` (`piutang_id`, `piutang_tanggal`, `piutang_nominal`, `piut
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi`
+-- Struktur dari tabel `transaksi`
 --
 
-CREATE TABLE `transaksi` (
-  `transaksi_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `transaksi` (
+`transaksi_id` int(11) NOT NULL,
   `transaksi_tanggal` date NOT NULL,
   `transaksi_jenis` enum('Pengeluaran','Pemasukan') NOT NULL,
   `transaksi_kategori` int(11) NOT NULL,
@@ -122,48 +121,28 @@ CREATE TABLE `transaksi` (
   `transaksi_bank` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `transaksi`
---
-
-INSERT INTO `transaksi` (`transaksi_id`, `transaksi_tanggal`, `transaksi_jenis`, `transaksi_kategori`, `transaksi_nominal`, `transaksi_keterangan`, `transaksi_bank`) VALUES
-(1, '2019-06-21', 'Pemasukan', 3, 1000000, 'Kiki\r\n', 1),
-(4, '2019-06-21', 'Pengeluaran', 8, 50000, 'Beli Alat Kantor', 1),
-(5, '2019-06-20', 'Pemasukan', 4, 1500000, '', 1),
-(6, '2019-06-06', 'Pemasukan', 1, 13570000, 'Pembayaran Project', 1),
-(8, '2019-06-14', 'Pemasukan', 12, 20000000, 'Pembuatan Aplikasi Sistem Rumah Sakit Karya Bakti', 1),
-(9, '2019-06-22', 'Pengeluaran', 13, 200000, 'Biaya Berobat Pak Tele', 1),
-(10, '2019-06-22', 'Pemasukan', 3, 4000000, 'Pembuatan Aplikasi Klinik', 3),
-(11, '2019-05-14', 'Pemasukan', 3, 1000000, '', 1),
-(12, '2019-06-21', 'Pengeluaran', 10, 32000000, 'tes', 3),
-(13, '2019-06-23', 'Pengeluaran', 14, 300000, 'Hosting Tahunan', 1),
-(15, '2019-06-23', 'Pengeluaran', 14, 300000, 'Biaya Hosting tahun Depan', 3),
-(16, '2019-06-23', 'Pemasukan', 4, 2000000, 'Penjualan Aplikasi Laba Rugi', 1),
-(17, '2019-06-23', 'Pemasukan', 4, 2000000, 'Penjualan Aplikasi Akademik Sekolah SMP 888', 1);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
-CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `user` (
+`user_id` int(11) NOT NULL,
   `user_nama` varchar(100) NOT NULL,
   `user_username` varchar(100) NOT NULL,
   `user_password` varchar(100) NOT NULL,
   `user_foto` varchar(100) DEFAULT NULL,
   `user_level` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`user_id`, `user_nama`, `user_username`, `user_password`, `user_foto`, `user_level`) VALUES
-(1, 'Ahmad Jhony', 'admin', '0192023a7bbd73250516f069df18b500', '482937136_avatar.png', 'administrator'),
-(6, 'Maimun', 'manajemen', 'cc2bd8f09bb88b5dd20f9b432631b8ca', '', 'manajemen'),
-(7, 'samsul', 'samsul', 'b5146ab5c012993e868d0f7f3ab2c092', '', 'administrator');
+(1, 'Frisca Sealtiana', 'admin', '0192023a7bbd73250516f069df18b500', '482937136_avatar.png', 'administrator'),
+(8, 'Keuangan', 'Keuangan', '0192023a7bbd73250516f069df18b500', '', 'manajemen');
 
 --
 -- Indexes for dumped tables
@@ -173,37 +152,37 @@ INSERT INTO `user` (`user_id`, `user_nama`, `user_username`, `user_password`, `u
 -- Indexes for table `bank`
 --
 ALTER TABLE `bank`
-  ADD PRIMARY KEY (`bank_id`);
+ ADD PRIMARY KEY (`bank_id`);
 
 --
 -- Indexes for table `hutang`
 --
 ALTER TABLE `hutang`
-  ADD PRIMARY KEY (`hutang_id`);
+ ADD PRIMARY KEY (`hutang_id`);
 
 --
 -- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
-  ADD PRIMARY KEY (`kategori_id`);
+ ADD PRIMARY KEY (`kategori_id`);
 
 --
 -- Indexes for table `piutang`
 --
 ALTER TABLE `piutang`
-  ADD PRIMARY KEY (`piutang_id`);
+ ADD PRIMARY KEY (`piutang_id`);
 
 --
 -- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD PRIMARY KEY (`transaksi_id`);
+ ADD PRIMARY KEY (`transaksi_id`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
+ ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -213,34 +192,32 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bank`
 --
 ALTER TABLE `bank`
-  MODIFY `bank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+MODIFY `bank_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `hutang`
 --
 ALTER TABLE `hutang`
-  MODIFY `hutang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+MODIFY `hutang_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
+MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `piutang`
 --
 ALTER TABLE `piutang`
-  MODIFY `piutang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+MODIFY `piutang_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `transaksi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
+MODIFY `transaksi_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
